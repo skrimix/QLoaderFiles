@@ -22,8 +22,6 @@ else
     exit 1
 fi
 
-ARCH="arm64"
-
 if [ "$ARCH" = "arm64" ]; then
 while true; do
     read -p "Do you want to install the native M1 version of the Loader? (y/n) " yn
