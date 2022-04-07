@@ -34,14 +34,14 @@ done
 fi
 echo "Using $ARCH architecture"
 
+echo -e "\nPlease select installation directory:"
+TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Please select installation directory:"}).toString()')"
+echo "Selected installation path: $TARGETPATH"
 
 echo -e "\nDownloading latest release for ${ARCH}..."
 curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/osx-$ARCH.zip"
 echo "Download complete"
 
-echo -e "\nPlease select destination directory:"
-TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Please select installation directory:"}).toString()')"
-echo "Selected installation path: $TARGETPATH"
 echo "Installing"
 if [ -d osx-$ARCH ]; then
     rm -rf osx-$ARCH
