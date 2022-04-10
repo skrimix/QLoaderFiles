@@ -16,22 +16,23 @@ if [ "${arch_name}" = "x86_64" ]; then
     fi 
 elif [ "${arch_name}" = "arm64" ]; then
     echo "Running on M1"
-    ARCH="arm64"
+    #ARCH="arm64"
+    ARCH="x64"
 else
     echo "Unknown architecture: ${arch_name}"
     exit 1
 fi
 
-if [ "$ARCH" = "arm64" ]; then
-while true; do
-    read -p "Do you want to install the native M1 version of the Loader? (y/n) " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) ARCH="x64"; break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-fi
+#if [ "$ARCH" = "arm64" ]; then
+#while true; do
+#    read -p "Do you want to install the native M1 version of the Loader? (y/n) " yn
+#    case $yn in
+#        [Yy]* ) break;;
+#        [Nn]* ) ARCH="x64"; break;;
+#        * ) echo "Please answer yes or no.";;
+#    esac
+#done
+#fi
 echo "Using $ARCH architecture"
 
 echo -e "\nPlease select installation directory:"
