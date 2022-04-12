@@ -87,7 +87,7 @@ echo -e "\nInstallation completed\nNow you can run the Loader from $TARGETPATH/L
 }
 
 linux_install() {
-if [ "$(getconf LONGBIT)" != "64" ]; then
+if [ "$(getconf LONG_BIT)" != "64" ]; then
     echo "You are running x86 Linux"
     echo "Loader only supports x64 Linux"
     exit 1
