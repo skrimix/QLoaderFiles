@@ -49,7 +49,7 @@ while true; do
 done
 
 while true; do
-    read -p "Do you want to install trailers addon? (y/n) " yn
+    read -p "Do you want to install optional trailers add-on (~1GB)? (y/n) " yn
     case $yn in
         [Yy]* ) TRAILERS=1;break;;
         [Nn]* ) TRAILERS=0;break;;
@@ -58,7 +58,7 @@ while true; do
 done
 
 
-echo -e "\nDownloading latest release for ${ARCH}..."
+echo -e "\nDownloading latest release for macOS ${ARCH}..."
 curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/osx-$ARCH.zip"
 echo "Download complete"
 
@@ -76,21 +76,80 @@ if [ "$TRAILERS" = "1" ]; then
     curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
     echo "Download complete"
     echo "Copying trailers add-on to installation directory. Loader will install it on first start."
-    mv "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
+    mv -f "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
 fi
 
 # Just in case
 echo "Removing quarantine attrs"
 xattr -rd com.apple.quarantine "$TARGETPATH/Loader/"
 
-echo -e "Installation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
+echo -e "\nInstallation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
 }
 
 linux_install() {
-echo "Linux is not supported by this script yet, sorry!"
-echo "Please use manual installation instructions"
-echo "Exiting..."
-exit 1
+if [ "$(getconf LONGBIT)" != "64" ]; then
+    echo "You are running x86 Linux"
+    echo "Loader only supports x64 Linux"
+    exit 1
+fi
+
+echo -e "\nPlease enter installation directory path:"
+read TARGETPATH
+# Check if directory exists
+if [ ! -d "$TARGETPATH" ]; then
+    echo "Directory $TARGETPATH does not exist"
+    exit 1
+fi
+
+while true; do
+    read -p "Do you want to install the Loader to the selected directory? (y/n) " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you want to install optional trailers add-on (~1GB)? (y/n) " yn
+    case $yn in
+        [Yy]* ) TRAILERS=1;break;;
+        [Nn]* ) TRAILERS=0;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+echo -e "\nDownloading latest release for Linux x64..."
+curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-x64.zip"
+echo "Download complete"
+
+echo "Installing"
+if [ -d linux-x64 ]; then
+    rm -rf linux-x64
+fi
+unzip -q "linux-x64.zip"
+rm "linux-x64.zip"
+cp -rf "linux-x64/" "$TARGETPATH/Loader/"
+rm -r "linux-x64"
+
+if [ "$TRAILERS" = "1" ]; then
+    echo "Downloading trailers add-on..."
+    curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
+    echo "Download complete"
+    echo "Copying trailers add-on to installation directory. Loader will install it on first start."
+    mv -f "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
+
+    echo "NOTE: You need to have VLC player installed to use trailers add-on."
+    # If we are running on Arch, show message with it's package names
+    if [ -f /etc/pacman.conf ]; then
+        echo "You may also need to install libx11 (from extra repository) and libvlc (from AUR)"
+    # Else show message with debian package names
+    else
+        echo "You may also need to install libx11-dev and libvlc-dev packages."
+    fi
+fi
+
+echo -e "\nInstallation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
 }
 
 
