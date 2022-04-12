@@ -3,7 +3,7 @@
 set -eu
 trap 'echo "Script failed with exit code $?."' EXIT
 
-macos_installation() {
+macos_install() {
 echo -e "\nDetecting processor architecture..."
 arch_name=$(uname -m)
 if [ "${arch_name}" = "x86_64" ]; then
@@ -39,6 +39,25 @@ echo -e "\nPlease select installation directory:"
 TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Please select installation directory:"}).toString()')"
 echo "Selected installation path: $TARGETPATH"
 
+while true; do
+    read -p "Do you want to install the Loader to the selected directory? (y/n) " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you want to install trailers addon? (y/n) " yn
+    case $yn in
+        [Yy]* ) TRAILERS=1;break;;
+        [Nn]* ) TRAILERS=0;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
 echo -e "\nDownloading latest release for ${ARCH}..."
 curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/osx-$ARCH.zip"
 echo "Download complete"
@@ -52,6 +71,14 @@ rm "osx-$ARCH.zip"
 cp -rf "osx-$ARCH/" "$TARGETPATH/Loader/"
 rm -r "osx-$ARCH"
 
+if [ "$TRAILERS" = "1" ]; then
+    echo "Downloading trailers add-on..."
+    curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
+    echo "Download complete"
+    echo "Copying trailers add-on to installation directory. Loader will install it on first start."
+    mv "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
+fi
+
 # Just in case
 echo "Removing quarantine attrs"
 xattr -rd com.apple.quarantine "$TARGETPATH/Loader/"
@@ -59,7 +86,7 @@ xattr -rd com.apple.quarantine "$TARGETPATH/Loader/"
 echo -e "Installation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
 }
 
-linux_installation() {
+linux_install() {
 echo "Linux is not supported by this script yet, sorry!"
 echo "Please use manual installation instructions"
 echo "Exiting..."
@@ -73,9 +100,9 @@ echo "Welcome to Loader online installer"
 echo -e "\nDetecting OS..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Running on macOS"
-        macos_installation
+        macos_install
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-        linux_installation
+        linux_install
 else
         echo "Your OS is not supported, sorry!"
         echo "Exiting..."
