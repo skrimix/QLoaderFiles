@@ -83,7 +83,7 @@ fi
 echo "Removing quarantine attrs"
 xattr -rd com.apple.quarantine "$TARGETPATH/Loader/"
 
-echo -e "\nInstallation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
+echo -e "\nInstallation completed\nNow you can run the Loader from ${TARGETPATH}Loader/"
 }
 
 linux_install() {
@@ -120,15 +120,15 @@ while true; do
 done
 
 echo -e "\nDownloading latest release for Linux x64..."
-curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-x64.zip"
+curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-x64.tar.gz"
 echo "Download complete"
 
 echo "Installing"
 if [ -d linux-x64 ]; then
     rm -rf linux-x64
 fi
-unzip -q "linux-x64.zip"
-rm "linux-x64.zip"
+tar xf "linux-x64.tar.gz"
+rm "linux-x64.tar.gz"
 cp -rf "linux-x64/" "$TARGETPATH/Loader/"
 rm -r "linux-x64"
 
@@ -149,7 +149,7 @@ if [ "$TRAILERS" = "1" ]; then
     fi
 fi
 
-echo -e "\nInstallation completed\nNow you can run the Loader from $TARGETPATH/Loader/"
+echo -e "\nInstallation completed\nNow you can run the Loader from ${TARGETPATH}Loader/"
 }
 
 
