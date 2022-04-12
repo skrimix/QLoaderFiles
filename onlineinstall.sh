@@ -37,6 +37,10 @@ echo "Using $ARCH architecture"
 
 echo -e "\nSelect installation directory:"
 TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Select installation directory:"}).toString()')"
+# Add trailing slash if not present
+if [ "${TARGETPATH: -1}" != "/" ]; then
+    TARGETPATH="$TARGETPATH/"
+fi
 echo "Selected installation path: $TARGETPATH"
 
 while true; do
@@ -68,7 +72,7 @@ if [ -d osx-$ARCH ]; then
 fi
 unzip -q "osx-$ARCH.zip"
 rm "osx-$ARCH.zip"
-cp -rf "osx-$ARCH/" "$TARGETPATH/Loader/"
+cp -rf "osx-$ARCH/" "${TARGETPATH}Loader/"
 rm -r "osx-$ARCH"
 
 if [ "$TRAILERS" = "1" ]; then
@@ -76,12 +80,12 @@ if [ "$TRAILERS" = "1" ]; then
     curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
     echo "Download complete"
     echo "Copying trailers add-on to installation directory. Loader will install it on first start."
-    mv -f "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
+    mv -f "TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
 fi
 
 # Just in case
 echo "Removing quarantine attrs"
-xattr -rd com.apple.quarantine "$TARGETPATH/Loader/"
+xattr -rd com.apple.quarantine "${TARGETPATH}Loader/"
 
 echo -e "\nInstallation completed\nNow you can run the Loader from ${TARGETPATH}Loader/"
 }
@@ -137,7 +141,7 @@ if [ -d linux-x64 ]; then
 fi
 tar xf "linux-x64.tar.gz"
 rm "linux-x64.tar.gz"
-cp -rf "linux-x64/" "$TARGETPATH/Loader/"
+cp -rf "linux-x64/" "${TARGETPATH}Loader/"
 rm -r "linux-x64"
 
 if [ "$TRAILERS" = "1" ]; then
@@ -145,7 +149,7 @@ if [ "$TRAILERS" = "1" ]; then
     curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
     echo "Download complete"
     echo "Copying trailers add-on to installation directory. Loader will install it on first start."
-    mv -f "TrailersAddon.zip" "$TARGETPATH/Loader/TrailersAddon.zip"
+    mv -f "TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
 
     echo "NOTE: You need to have VLC player installed to use trailers add-on."
     # If we are running on Arch, show message with it's package names
