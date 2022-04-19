@@ -36,7 +36,8 @@ fi
 echo "Using $ARCH architecture"
 
 echo -e "\nSelect installation directory:"
-TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Select installation directory:"}).toString()')"
+# open folder picking dialog, set path to Desktop if fails
+TARGETPATH="$(osascript -l JavaScript -e 'a=Application.currentApplication();a.includeStandardAdditions=true;a.chooseFolder({withPrompt:"Select installation directory:"}).toString()')" || { echo "Failed to select directory, setting to Desktop"; TARGETPATH="/Users/$(whoami)/Desktop"; }
 # Add trailing slash if not present
 if [ "${TARGETPATH: -1}" != "/" ]; then
     TARGETPATH="$TARGETPATH/"
@@ -47,7 +48,7 @@ while true; do
     read -p "Do you want to install the Loader to the selected directory? (y/n) " yn
     case $yn in
         [Yy]* ) break;;
-        [Nn]* ) exit;;
+        [Nn]* ) echo "Installation cancelled."; exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
