@@ -25,7 +25,7 @@
             </sparkle:releaseNotesLink>
             <pubDate>Tue, 12 Apr 2022 12:04:00 +0000</pubDate>
             <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.1.2-alpha/linux-x64.tar.gz"
-                       sparkle:version="0.1.1.0"
+                       sparkle:version="0.1.2.0"
                        sparkle:os="windows"
                        sparkle:criticalUpdate="false"
                        length="211894371"
