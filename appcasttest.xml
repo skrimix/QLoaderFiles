@@ -8,8 +8,18 @@
         <item>
             <title>Version 0.1.3test</title>
             <description>
-                - fixed bugs
-                - added new bugs
+                <ul>
+                    <li>new online installer, check instructions post</li>
+                    <li>fixed Quest 1 identification</li>
+                    <li>fixed crash when uninstalling multiple games</li>
+                    <li>fixed conflict with sidenoder and other rclone instances</li>
+                    <li>maybe fixed some random download failures. Please report if you still have downloads failing</li>
+                    <li>if game list is broken Loader will try to switch to another mirror instead of giving up</li>
+                    <li>exceptions log file is now retained between launches</li>
+                    <li>autosave settings after restoring defaults</li>
+                    <li>added downloader bandwidth limit setting</li>
+                    <li>if trailers add-on zip is found nearby, it will be installed automatically</li>
+                </ul>
             </description>
             
             <pubDate>Mon, 02 May 2022 12:30:00 +0000</pubDate>
