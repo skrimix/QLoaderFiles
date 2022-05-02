@@ -73,7 +73,7 @@ if [ -d osx-$ARCH ]; then
 fi
 unzip -q "osx-$ARCH.zip"
 rm "osx-$ARCH.zip"
-cp -rf "osx-$ARCH/" "${TARGETPATH}Loader/"
+cp -rf "osx-$ARCH/." "${TARGETPATH}Loader/"
 rm -r "osx-$ARCH"
 
 if [ "$TRAILERS" = "1" ]; then
@@ -142,7 +142,7 @@ if [ -d linux-x64 ]; then
 fi
 tar xf "linux-x64.tar.gz"
 rm "linux-x64.tar.gz"
-cp -rf "linux-x64/" "${TARGETPATH}Loader/"
+cp -rf "linux-x64/." "${TARGETPATH}Loader/"
 rm -r "linux-x64"
 
 if [ "$TRAILERS" = "1" ]; then
