@@ -9,13 +9,16 @@ arch_name=$(uname -m)
 if [ "${arch_name}" = "x86_64" ]; then
     if [ "$(sysctl -in sysctl.proc_translated)" = "1" ]; then
         echo "Running on Rosetta 2"
-        ARCH="arm64"
+        echo "No native support for arm64 yet, will use Rosetta 2"
+        #ARCH="arm64"
+        ARCH="x64"
     else
         echo "Running on native Intel"
         ARCH="x64"
     fi 
 elif [ "${arch_name}" = "arm64" ]; then
     echo "Running on M1"
+    echo "No native support for arm64 yet, will need Rosetta 2"
     #ARCH="arm64"
     ARCH="x64"
 else
@@ -88,11 +91,17 @@ fi
 echo "Removing quarantine attrs"
 xattr -rd com.apple.quarantine "${TARGETPATH}Loader/"
 
-echo -e "\nInstallation completed\nNow you can run the Loader from ${TARGETPATH}Loader/"
+echo -e "\nInstallation completed\nLoader has been installed to ${TARGETPATH}Loader/"
+echo -e "You can start it by double-clicking the Loader executable in Finder.\n"
 }
 
 linux_install() {
-if [ "$(getconf LONG_BIT)" != "64" ]; then
+if [ "$(uname -m)" = "aarch64" ]; then
+    echo "arm64 is not supported yet, sorry."
+    exit 1
+fi
+
+if [ "$(getconf LONG_BIT)" == "32" ]; then
     echo "You are running x86 Linux"
     echo "Loader only supports x64 Linux"
     exit 1
@@ -162,7 +171,8 @@ if [ "$TRAILERS" = "1" ]; then
     fi
 fi
 
-echo -e "\nInstallation completed\nNow you can run the Loader from ${TARGETPATH}Loader/"
+echo -e "\nInstallation completed\nLoader has been installed to ${TARGETPATH}Loader/"
+echo -e "You can start it with the following command:\n${TARGETPATH}Loader/Loader\n"
 }
 
 
