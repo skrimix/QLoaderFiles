@@ -64,7 +64,7 @@
             <sparkle:releaseNotesLink>
             https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.1.md
             </sparkle:releaseNotesLink>
-            <pubDate>Mon, 13 Jul 2022 20:05:00 +0000</pubDate>
+            <pubDate>Wed, 13 Jul 2022 20:05:00 +0000</pubDate>
             <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.1-alpha/linux-x64.tar.gz"
                        sparkle:version="0.2.1.0"
                        sparkle:os="linux"
@@ -77,7 +77,7 @@
             <sparkle:releaseNotesLink>
             https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.1.md
             </sparkle:releaseNotesLink>
-            <pubDate>Mon, 13 Jul 2022 20:05:00 +0000</pubDate>
+            <pubDate>Wed, 13 Jul 2022 20:05:00 +0000</pubDate>
             <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.1-alpha/osx-x64.zip"
                        sparkle:version="0.2.1.0"
                        sparkle:os="osx"
