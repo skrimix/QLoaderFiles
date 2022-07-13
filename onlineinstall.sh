@@ -96,14 +96,21 @@ echo -e "You can start it by double-clicking the Loader executable in Finder.\n"
 }
 
 linux_install() {
-if [ "$(uname -m)" = "aarch64" ]; then
-    echo "arm64 is not supported yet, sorry."
-    exit 1
-fi
-
-if [ "$(getconf LONG_BIT)" == "32" ]; then
-    echo "You are running x86 Linux"
-    echo "Loader only supports x64 Linux"
+echo -e "\nDetecting processor architecture..."
+arch_name=$(uname -m)
+if [ "${arch_name}" = "x86_64" ]; then
+    if [ "$(getconf LONG_BIT)" == "32" ]; then
+        echo "You are running x86 Linux"
+        echo "Loader only supports x64 and arm64 Linux"
+        exit 1
+    fi
+    echo "Running on x64"
+    ARCH="x64"
+elif [ "${arch_name}" = "arm64" ]; then
+    echo "Running on arm64"
+    ARCH="arm64"
+else
+    echo "Unknown architecture: ${arch_name}"
     exit 1
 fi
 
@@ -141,18 +148,18 @@ while true; do
     esac
 done
 
-echo -e "\nDownloading latest release for Linux x64..."
-curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-x64.tar.gz"
+echo -e "\nDownloading latest release for Linux ${ARCH}..."
+curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-$ARCH.tar.gz"
 echo "Download complete"
 
 echo "Installing"
-if [ -d linux-x64 ]; then
-    rm -rf linux-x64
+if [ -d linux-$ARCH ]; then
+    rm -rf linux-$ARCH
 fi
-tar xf "linux-x64.tar.gz"
-rm "linux-x64.tar.gz"
-cp -rf "linux-x64/." "${TARGETPATH}Loader/"
-rm -r "linux-x64"
+tar xf "linux-$ARCH.tar.gz"
+rm "linux-$ARCH.tar.gz"
+cp -rf "linux-$ARCH/." "${TARGETPATH}Loader/"
+rm -r "linux-$ARCH"
 
 if [ "$TRAILERS" = "1" ]; then
     echo "Downloading trailers add-on..."
