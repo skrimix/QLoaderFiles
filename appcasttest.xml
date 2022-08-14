@@ -6,7 +6,6 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
-        <item>
             <title>Version 0.2.2 Linux</title>
             <sparkle:releaseNotesLink>
             https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.2.md
