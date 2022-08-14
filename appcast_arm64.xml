@@ -18,5 +18,18 @@
                        sparkle:criticalUpdate="false"
                        length="218557298"
                        type="application/octet-stream" />
-        </item>
+    </item>
+    <item>
+            <title>Version 0.2.2 Linux arm64</title>
+            <sparkle:releaseNotesLink>
+            https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.2.md
+            </sparkle:releaseNotesLink>
+            <pubDate>Sun, 14 Aug 2022 21:00:00 +0000</pubDate>
+            <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.2-beta/linux-arm64.tar.gz"
+                       sparkle:version="0.2.2.1"
+                       sparkle:os="linux"
+                       sparkle:criticalUpdate="false"
+                       length="225241971"
+                       type="application/octet-stream" />
+    </item>
 </rss>
