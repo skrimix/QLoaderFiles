@@ -12,11 +12,11 @@
             https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.2.md
             </sparkle:releaseNotesLink>
             <pubDate>Sun, 14 Aug 2022 15:30:00 +0000</pubDate>
-            <enclosure url="https://data.atonline.net/~jwt/eyJhY3QiOiJnZXQiLCJpbiI6eyJkbCI6dHJ1ZX0sIm1pbWUiOiJhcHBsaWNhdGlvbi94LWd6aXAiLCJwIjoiYmxvYnNyYy9ibG9icy1ycDR3aHItZDduNS1iMmJiLWFoY2UtaTU0bTNmeWUifQ/linux-x64.tar.gz?v=1&u=phplatform&e=1660492763&s=fJstC6LTocviREsiOon1drqhzWt4r8NuuP5OIW3uMnM"
+            <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.1-alpha/linux-x64.zip"
                        sparkle:version="0.2.2.0"
                        sparkle:os="linux"
                        sparkle:criticalUpdate="false"
-                       length="234659103"
+                       length="222296813"
                        type="application/octet-stream" />
         </item>
         <item>
@@ -25,11 +25,11 @@
             https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.2.md
             </sparkle:releaseNotesLink>
             <pubDate>Sun, 14 Aug 2022 15:30:00 +0000</pubDate>
-            <enclosure url="https://data.atonline.net/~jwt/eyJhY3QiOiJnZXQiLCJpbiI6eyJkbCI6dHJ1ZX0sIm1pbWUiOiJhcHBsaWNhdGlvbi94LXppcC1jb21wcmVzc2VkIiwicCI6ImJsb2JzcmMvYmxvYnMteTJqN2ZnLXlsZWYtaGVwZC12bm41LXloc2NhdGhpIn0/osx-x64.zip?v=1&u=phplatform&e=1660492640&s=MoCWm8RYsYbkt6YwI8K4S-_eOCB-Er3sINt9FmHDCX8"
+            <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.1-alpha/osx-x64.zip"
                        sparkle:version="0.2.2.0"
                        sparkle:os="osx"
                        sparkle:criticalUpdate="false"
-                       length="255475734"
+                       length="249300849"
                        type="application/octet-stream" />
         </item>
     </channel>
