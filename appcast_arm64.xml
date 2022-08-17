@@ -32,4 +32,17 @@
                        length="225241971"
                        type="application/octet-stream" />
     </item>
+    <item>
+        <title>Version 0.2.3 Linux arm64</title>
+        <sparkle:releaseNotesLink>
+        https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.3.md
+        </sparkle:releaseNotesLink>
+        <pubDate>Wed, 17 Aug 2022 22:23:38 +0000</pubDate>
+        <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.3-beta/linux-arm64.tar.gz"
+                    sparkle:version="v0.2.3.1"
+                    sparkle:os="linux"
+                    sparkle:criticalUpdate="false"
+                    length="234623555"
+                    type="application/octet-stream" />
+    </item>
 </rss>
