@@ -166,5 +166,32 @@
                         length="156918564"
                         type="application/octet-stream" />
         </item>
+
+        <item>
+            <title>Version 0.2.5 Linux</title>
+            <sparkle:releaseNotesLink>
+            https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.5.md
+            </sparkle:releaseNotesLink>
+            <pubDate>Sat, 08 Oct 2022 15:34:10 +0000</pubDate>
+            <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.5-beta/linux-x64.tar.gz"
+                        sparkle:version="0.2.5.1"
+                        sparkle:os="linux"
+                        sparkle:criticalUpdate="true"
+                        length="141996747"
+                        type="application/octet-stream" />
+        </item>
+        <item>
+            <title>Version 0.2.5 Mac</title>
+            <sparkle:releaseNotesLink>
+            https://github.com/skrimix/QLoaderFiles/raw/master/release_notes/v0.2.5.md
+            </sparkle:releaseNotesLink>
+            <pubDate>Sat, 08 Oct 2022 15:34:10 +0000</pubDate>
+            <enclosure url="https://github.com/skrimix/QLoaderFiles/releases/download/v0.2.5-beta/osx-x64.zip"
+                        sparkle:version="0.2.5.1"
+                        sparkle:os="osx"
+                        sparkle:criticalUpdate="true"
+                        length="162804363"
+                        type="application/octet-stream" />
+        </item>
     </channel>
 </rss>
