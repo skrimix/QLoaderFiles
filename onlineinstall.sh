@@ -67,24 +67,24 @@ done
 
 
 echo -e "\nDownloading latest release for macOS ${ARCH}..."
-curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/osx-$ARCH.zip"
+curl --fail -L "https://github.com/skrimix/QLoaderFiles/releases/latest/download/osx-$ARCH.zip" -o "/tmp/osx-$ARCH.zip"
 echo "Download complete"
 
 echo "Installing"
-if [ -d osx-$ARCH ]; then
-    rm -rf osx-$ARCH
+if [ -d /tmp/osx-$ARCH ]; then
+    rm -rf /tmp/osx-$ARCH
 fi
-unzip -q "osx-$ARCH.zip"
-rm "osx-$ARCH.zip"
-cp -rf "osx-$ARCH/." "${TARGETPATH}Loader/"
-rm -r "osx-$ARCH"
+unzip -q "/tmp/osx-$ARCH.zip" -d /tmp/osx-$ARCH
+rm "/tmp/osx-$ARCH.zip"
+cp -rf "/tmp/osx-$ARCH/." "${TARGETPATH}Loader/"
+rm -r "/tmp/osx-$ARCH"
 
 if [ "$TRAILERS" = "1" ]; then
     echo "Downloading trailers add-on..."
-    curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
+    curl --fail -L "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip" -o "/tmp/TrailersAddon.zip"
     echo "Download complete"
     echo "Copying trailers add-on to installation directory. Loader will install it on first start."
-    mv -f "TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
+    mv -f "/tmp/TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
 fi
 
 # Just in case
@@ -149,24 +149,24 @@ while true; do
 done
 
 echo -e "\nDownloading latest release for Linux ${ARCH}..."
-curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-$ARCH.tar.gz"
+curl --fail -L "https://github.com/skrimix/QLoaderFiles/releases/latest/download/linux-$ARCH.tar.gz" -o /tmp/linux-$ARCH.tar.gz
 echo "Download complete"
 
 echo "Installing"
-if [ -d linux-$ARCH ]; then
-    rm -rf linux-$ARCH
+if [ -d /tmp/linux-$ARCH ]; then
+    rm -rf /tmp/linux-$ARCH
 fi
-tar xf "linux-$ARCH.tar.gz"
-rm "linux-$ARCH.tar.gz"
-cp -rf "linux-$ARCH/." "${TARGETPATH}Loader/"
-rm -r "linux-$ARCH"
+tar xf "/tmp/linux-$ARCH.tar.gz" -C /tmp
+rm "/tmp/linux-$ARCH.tar.gz"
+cp -rf "/tmp/linux-$ARCH/." "${TARGETPATH}Loader/"
+rm -r "/tmp/linux-$ARCH"
 
 if [ "$TRAILERS" = "1" ]; then
     echo "Downloading trailers add-on..."
-    curl --fail -L -O "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip"
+    curl --fail -L "https://github.com/skrimix/QLoaderFiles/releases/latest/download/TrailersAddon.zip" -o /tmp/TrailersAddon.zip
     echo "Download complete"
     echo "Copying trailers add-on to installation directory. Loader will install it on first start."
-    mv -f "TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
+    mv -f "/tmp/TrailersAddon.zip" "${TARGETPATH}Loader/TrailersAddon.zip"
 
     echo "NOTE: You need to have VLC player installed to use trailers add-on."
     # If we are running on Arch, show message with it's package names
@@ -176,6 +176,35 @@ if [ "$TRAILERS" = "1" ]; then
     else
         echo "You may also need to install libx11-dev and libvlc-dev packages."
     fi
+fi
+
+while true; do
+    read -p "Do you want to create a desktop entry? (y/n) " yn
+    case $yn in
+        [Yy]* ) CREATESHORTCUT=1;break;;
+        [Nn]* ) CREATESHORTCUT=0;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+if [ "$CREATESHORTCUT" = "1" ]; then
+    echo "Creating desktop entry..."
+    if [ ! -d ~/.local/share/applications ]; then
+        mkdir -p ~/.local/share/applications
+    fi
+    cat > ~/.local/share/applications/com.ffa.qloader.desktop <<EOL
+[Desktop Entry]
+Name=QLoader
+Comment=Launch QLoader
+Exec=${TARGETPATH}Loader/Loader
+Icon=${TARGETPATH}Loader/Loader.png
+Terminal=true
+Type=Application
+Categories=Game;
+Path=${TARGETPATH}Loader/
+EOL
+chmod +x ~/.local/share/applications/com.ffa.qloader.desktop
+echo "Desktop entry created"
 fi
 
 echo -e "\nInstallation completed\nLoader has been installed to ${TARGETPATH}Loader/"
