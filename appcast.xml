@@ -204,7 +204,7 @@
                         sparkle:version="0.2.6.1"
                         sparkle:os="linux"
                         sparkle:criticalUpdate="false"
-                        length="149056422"
+                        length="149049943"
                         type="application/octet-stream" />
         </item>
         <item>
@@ -217,7 +217,7 @@
                         sparkle:version="0.2.6.1"
                         sparkle:os="osx"
                         sparkle:criticalUpdate="false"
-                        length="169970204"
+                        length="169949540"
                         type="application/octet-stream" />
         </item>
     </channel>
